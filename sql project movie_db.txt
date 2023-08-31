@@ -1,0 +1,152 @@
+CREATE TABLE actor (
+    act_id INT PRIMARY KEY,
+    act_fname CHAR(20),
+    act_lname CHAR(20),
+    act_gender CHAR(1)
+);
+
+CREATE TABLE genres (
+    gen_id INT PRIMARY KEY,
+    gen_title CHAR(20)
+);
+
+CREATE TABLE director (
+    dir_id INT PRIMARY KEY,
+    dir_fname CHAR(20),
+    dir_lname CHAR(20)
+);
+
+CREATE TABLE movie (
+    mov_id INT PRIMARY KEY,
+    mov_title CHAR(50),
+    mov_year INT,
+    mov_time INT,
+    mov_lang CHAR(50),
+    mov_dt_rel DATE,
+    mov_rel_country CHAR(5)
+);
+
+CREATE TABLE movie_genres (
+    mov_id INT,
+    gen_id INT,
+    FOREIGN KEY (mov_id) REFERENCES movie(mov_id),
+    FOREIGN KEY (gen_id) REFERENCES genres(gen_id)
+);
+
+CREATE TABLE movie_direction (
+    dir_id INT,
+    mov_id INT,
+    FOREIGN KEY (dir_id) REFERENCES director(dir_id),
+    FOREIGN KEY (mov_id) REFERENCES movie(mov_id)
+);
+
+CREATE TABLE reviewer (
+    rev_id INT PRIMARY KEY,
+    rev_name CHAR(30)
+);
+
+CREATE TABLE rating (
+    mov_id INT,
+    rev_id INT,
+    rev_stars INT,
+    num_0_rating INT,
+    FOREIGN KEY (mov_id) REFERENCES movie(mov_id),
+    FOREIGN KEY (rev_id) REFERENCES reviewer(rev_id)
+);
+
+CREATE TABLE movie_cast (
+    act_id INT,
+    mov_id INT,
+    rele CHAR(30),
+    FOREIGN KEY (act_id) REFERENCES actor(act_id),
+    FOREIGN KEY (mov_id) REFERENCES movie(mov_id)
+);
+
+
+
+INSERT INTO  ACTOR (act_id, act_fname, act_lname, act_gender) VALUES
+    (1, 'alia', 'bhatt', 'F'),
+    (2, 'Jennifer','Lawrence', 'F'),
+    (3, 'kiara', 'advani', 'F'),
+    (4,'akshay','kumar', 'F'),
+    (5,'amitabh','bachchan','M');
+
+ select * from actor;
+   
+ INSERT INTO GENRES (gen_id, gen_title) VALUES
+    (1, 'romantic'),
+    (2, 'Drama'),
+    (3, 'romantic'),
+    (4, 'action'),
+    (5, 'action');
+    
+select * from GENRES;
+
+INSERT INTO director (dir_id, dir_fname, dir_lname) VALUES
+    
+    (1, 'Steven','Spielberg'),
+    (2, 'Rajkumar','Hirani'),
+    (3, 'Mani','Ratnam'),
+    (4, 'Satyajit','Ray'),
+    (5, 'Karan','Johar');
+    
+ select * from director;
+
+INSERT INTO MOVIE (mov_id, mov_title, mov_year, mov_time, mov_lang, mov_dt_rel, mov_rel_country) VALUES
+    (1, 'Jurassic Park', 1993, 127, 'English', '1993-06-11', 'USA'),
+    (2, 'Inception', 2010, 148, 'English', '2010-07-16', 'USA'),
+    (3, 'Pulp Fiction', 1994, 154, 'English', '1994-10-14', 'USA');
+    (4, 'The Shawshank Redemption', 1994, 142, 'English', '1994-09-23', 'US'),
+    (5, 'Inception', 2010, 148, 'English', '2010-07-16', 'US'),
+
+ select * from movie;
+
+INSERT INTO movie_genres(mov_id, gen_id) VALUES
+    (1,1),
+    (2,2),
+    (3,3,
+    (4,4),
+    (5,5);
+
+ select * from movie_genres;
+
+INSERT INTO movie_direction (dir_id, mov_id)
+VALUES
+    (1,1),
+    (2,2),
+    (3,3),
+    (4,4),
+    (5,5);
+
+ select * from movie_direction;
+
+INSERT INTO reviewer (rev_id, rev_name)
+VALUES
+    (1,'adi'),
+    (2,'sharad'),
+    (3,'tushar'),
+     (4,'nehal'),
+     (5,'sabiya');   
+
+ select * from reviewer;
+
+INSERT INTO rating (mov_id, rev_id, rev_stars, num_0_rating)
+VALUES
+    (1, 1, 4,20207),
+    (2, 2, 5,48204),
+    (3, 3, 4,19524), 
+    (4, 4, 5,564265),
+    (5, 5, 5,458513 );
+
+select * from rating ;
+
+INSERT INTO movie_cast (act_id, mov_id, rele)
+VALUES
+    (1,1,'Dr. Alan Grant'),
+    (2,2,'Dom Cobb'),
+    (3,3,'Mal'),
+    (4,4,'Jules Winnfield'),
+    (5,5,'san');
+
+select * from rating;
+
